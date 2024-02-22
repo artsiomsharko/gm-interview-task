@@ -1,15 +1,23 @@
 <script setup>
-import sections from "@/locales/en.json";
+import { LOCALES } from "@/constants/locale";
+
+const { locale, t } = useIntl();
+
+const sections = computed(() => t("sections"));
 </script>
 
 <template>
   <header>
-    <h1>My amazing website</h1>
+    <h1>{{ t('header.title') }}</h1>
 
     <div>
       <a v-for="{ id, title } in sections" :key="id" :href="`#section-${id}`">
         {{ title }}
       </a>
+
+      <select v-model="locale">
+        <option v-for="lang in LOCALES" :key="lang" :selected="lang === locale">{{ lang }}</option>
+      </select>
     </div>
   </header>
 </template>
@@ -36,19 +44,30 @@ h1 {
 
 div {
   display: flex;
+  align-items: center;
   gap: 0.5rem;
+}
+
+a,
+select {
+  background-color: #eeeded;
+  color: #000000;
+  border: 1px solid #eaeaea;
+  transition: border-color 0.2s ease;
+  cursor: pointer;
+}
+
+a:hover,
+select:hover {
+  border-color: #000000;
+}
+
+select {
+  padding: 0.2rem;
 }
 
 a {
   padding: 0.5rem 1rem;
   text-decoration: none;
-  background-color: #eeeded;
-  color: #000000;
-  border: 1px solid #eaeaea;
-  transition: border-color 0.2s ease;
-}
-
-a:hover {
-  border-color: #000000;
 }
 </style>

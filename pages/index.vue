@@ -1,5 +1,7 @@
 <script setup>
-import sections from "@/locales/en.json";
+const { t } = useIntl();
+
+const sections = computed(() => t("sections"));
 </script>
 
 <template>
