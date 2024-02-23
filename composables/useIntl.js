@@ -24,7 +24,7 @@ export const useIntl = () => {
     const translatedValue = key
       .split(".")
       .filter((k) => k)
-      .reduce((obj, k) => obj[k], translation.value);
+      .reduce((obj, k) => obj?.[k], translation.value);
 
     return translatedValue || key;
   };

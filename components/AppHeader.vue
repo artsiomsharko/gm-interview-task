@@ -8,12 +8,14 @@ const sections = computed(() => t("sections"));
 
 <template>
   <header>
-    <h1>{{ t('header.title') }}</h1>
+    <h1>{{ t("header.title") }}</h1>
 
     <div>
       <a v-for="{ id, title } in sections" :key="id" :href="`#section-${id}`">
         {{ title }}
       </a>
+
+      <UserAvatar />
 
       <select v-model="locale">
         <option v-for="lang in LOCALES" :key="lang" :selected="lang === locale">{{ lang }}</option>
@@ -45,6 +47,7 @@ h1 {
 div {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 0.5rem;
 }
 
