@@ -18,15 +18,10 @@ export const useIntl = () => {
       }[locale.value] || en)
   );
 
-  const customTranslationsState = useState(CUSTOM_TRANSLATION_LS_KEY);
-
   const translation = computed(() => {
-    const customTranslation =
-      customTranslationsState.value || process.client
-        ? JSON.parse(localStorage.getItem(CUSTOM_TRANSLATION_LS_KEY))?.[locale.value] || {}
-        : {};
-
-    console.log("state", customTranslation);
+    const customTranslation = process.client
+      ? JSON.parse(localStorage.getItem(CUSTOM_TRANSLATION_LS_KEY))?.[locale.value] || {}
+      : {};
 
     Object.entries(customTranslation).forEach(([key, value]) => {
       const keys = key.split(".").filter((k) => k);
@@ -48,7 +43,6 @@ export const useIntl = () => {
   });
 
   const t = (key) => {
-    console.log(key, translation.value);
     if (!key) return "";
 
     const translatedValue = key
@@ -60,7 +54,6 @@ export const useIntl = () => {
   };
 
   return {
-    customTranslationsState,
     locale,
     t,
   };

@@ -14,11 +14,15 @@ defineProps({
 <template>
   <section>
     <a :id="`section-${id}`">
-      <h2 v-editable="`sections.${index}.title`"><slot name="title" /></h2>
+      <ClientOnly>
+        <h2 v-editable="`sections.${index}.title`"><slot name="title" /></h2>
+      </ClientOnly>
     </a>
-    <p v-editable="`sections.${index}.text`">
-      <slot name="content" />
-    </p>
+    <ClientOnly>
+      <p v-editable="`sections.${index}.text`">
+        <slot name="content" />
+      </p>
+    </ClientOnly>
   </section>
 </template>
 
