@@ -8,17 +8,21 @@ const sections = computed(() => t("sections"));
 
 <template>
   <header>
-    <h1>{{ t("header.title") }}</h1>
+    <ClientOnly>
+      <h1 v-editable="'header.title'">{{ t("header.title") }}</h1>
+    </ClientOnly>
 
     <div>
-      <a v-for="{ id, title } in sections" :key="id" :href="`#section-${id}`">
-        {{ title }}
-      </a>
+      <ClientOnly>
+        <a v-for="{ id, title } in sections" :key="id" :href="`#section-${id}`">
+          {{ title }}
+        </a>
+      </ClientOnly>
 
       <UserAvatar />
 
       <select v-model="locale">
-        <option v-for="lang in LOCALES" :key="lang" :selected="lang === locale">{{ lang }}</option>
+        <option v-for="lang in LOCALES" :key="lang">{{ lang }}</option>
       </select>
     </div>
   </header>

@@ -26,4 +26,9 @@ p {
   margin: 0;
   padding: 0;
 }
+
+[contenteditable="true"] {
+  background-color: #ffffff;
+  outline: 2px solid black;
+}
 </style>

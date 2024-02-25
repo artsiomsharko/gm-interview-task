@@ -4,15 +4,19 @@ defineProps({
     type: Number,
     required: true,
   },
+  index: {
+    type: Number,
+    required: true,
+  },
 });
 </script>
 
 <template>
   <section>
     <a :id="`section-${id}`">
-      <h2><slot name="title" /></h2>
+      <h2 v-editable="`sections.${index}.title`"><slot name="title" /></h2>
     </a>
-    <p>
+    <p v-editable="`sections.${index}.text`">
       <slot name="content" />
     </p>
   </section>
