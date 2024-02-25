@@ -4,6 +4,7 @@ export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.directive("editable", {
     mounted(el, { value: key }) {
       const locale = useCookie("locale");
+      const customTranslations = useState(CUSTOM_TRANSLATION_LS_KEY, () => ({}));
 
       const saveText = () => {
         const newText = el.innerText;
@@ -14,6 +15,7 @@ export default defineNuxtPlugin((nuxtApp) => {
           [locale.value]: { ...oldState?.[locale.value], [key]: newText },
         };
 
+        customTranslations.value = newState;
         localStorage.setItem(CUSTOM_TRANSLATION_LS_KEY, JSON.stringify(newState));
       };
 

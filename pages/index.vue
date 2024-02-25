@@ -1,7 +1,12 @@
 <script setup>
-const { t } = useIntl();
+const { t, customTranslationsState } = useIntl();
 
-const sections = computed(() => t("sections"));
+const sections = ref([]);
+
+watchEffect(() => {
+  console.log("XXX state", customTranslationsState.value);
+  sections.value = t("sections");
+});
 </script>
 
 <template>
